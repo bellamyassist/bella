@@ -1,0 +1,35 @@
+﻿2025-09-19 00:36:04Z | start prereqs
+2025-09-19 00:36:04Z | Python found: Python 3.11.9
+2025-09-19 00:36:04Z | venv already exists at C:\bella\venv
+2025-09-19 00:36:04Z | Upgrading pip
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (80.9.0)
+Requirement already satisfied: wheel in c:\bella\venv\lib\site-packages (0.45.1)
+2025-09-19 00:36:06Z | Installing python packages: fastapi, uvicorn[standard], python-dotenv, deep-translator, requests
+Requirement already satisfied: fastapi in c:\bella\venv\lib\site-packages (0.116.2)
+Requirement already satisfied: python-dotenv in c:\bella\venv\lib\site-packages (1.1.1)
+Requirement already satisfied: deep-translator in c:\bella\venv\lib\site-packages (1.11.4)
+Requirement already satisfied: requests in c:\bella\venv\lib\site-packages (2.32.5)
+Requirement already satisfied: uvicorn[standard] in c:\bella\venv\lib\site-packages (0.35.0)
+Requirement already satisfied: starlette<0.49.0,>=0.40.0 in c:\bella\venv\lib\site-packages (from fastapi) (0.48.0)
+Requirement already satisfied: pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 in c:\bella\venv\lib\site-packages (from fastapi) (2.11.9)
+Requirement already satisfied: typing-extensions>=4.8.0 in c:\bella\venv\lib\site-packages (from fastapi) (4.15.0)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi) (0.7.0)
+Requirement already satisfied: pydantic-core==2.33.2 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi) (2.33.2)
+Requirement already satisfied: typing-inspection>=0.4.0 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi) (0.4.1)
+Requirement already satisfied: anyio<5,>=3.6.2 in c:\bella\venv\lib\site-packages (from starlette<0.49.0,>=0.40.0->fastapi) (4.10.0)
+Requirement already satisfied: idna>=2.8 in c:\bella\venv\lib\site-packages (from anyio<5,>=3.6.2->starlette<0.49.0,>=0.40.0->fastapi) (3.10)
+Requirement already satisfied: sniffio>=1.1 in c:\bella\venv\lib\site-packages (from anyio<5,>=3.6.2->starlette<0.49.0,>=0.40.0->fastapi) (1.3.1)
+Requirement already satisfied: click>=7.0 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (8.2.1)
+Requirement already satisfied: h11>=0.8 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.16.0)
+Requirement already satisfied: colorama>=0.4 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.4.6)
+Requirement already satisfied: httptools>=0.6.3 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.6.4)
+Requirement already satisfied: pyyaml>=5.1 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (6.0.2)
+Requirement already satisfied: watchfiles>=0.13 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (1.1.0)
+Requirement already satisfied: websockets>=10.4 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (15.0.1)
+Requirement already satisfied: beautifulsoup4<5.0.0,>=4.9.1 in c:\bella\venv\lib\site-packages (from deep-translator) (4.13.5)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\bella\venv\lib\site-packages (from requests) (3.4.3)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\bella\venv\lib\site-packages (from requests) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in c:\bella\venv\lib\site-packages (from requests) (2025.8.3)
+Requirement already satisfied: soupsieve>1.2 in c:\bella\venv\lib\site-packages (from beautifulsoup4<5.0.0,>=4.9.1->deep-translator) (2.8)
+2025-09-19 00:36:07Z | prereqs done

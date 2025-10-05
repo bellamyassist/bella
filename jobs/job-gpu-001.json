@@ -1,0 +1,11 @@
+{
+    "job_id":  "job-gpu-001",
+    "type":  "train",
+    "script":  "neuro/train.py",
+    "args":  {
+                 "epochs":  10
+             },
+    "resources":  {
+                      "gpu":  true
+                  }
+}

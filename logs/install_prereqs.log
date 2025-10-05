@@ -1,0 +1,50 @@
+﻿2025-09-18T23:53:32 | START install_prereqs
+2025-09-18T23:53:32 | git found
+2025-09-18T23:53:32 | python found: Python 3.11.9
+2025-09-18T23:53:33 | pip available
+2025-09-18T23:53:33 | Using existing venv at C:\bella\venv
+2025-09-18T23:53:34 | END install_prereqs
+2025-09-19T00:04:56 | Starting install_prereqs_and_venv
+2025-09-19T00:04:56 | python found: Python 3.11.9
+2025-09-19T00:04:56 | Found existing venv at C:\bella\venv
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (65.5.0)
+Collecting setuptools
+  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting wheel
+  Downloading wheel-0.45.1-py3-none-any.whl.metadata (2.3 kB)
+Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+Installing collected packages: wheel, setuptools
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 65.5.0
+    Uninstalling setuptools-65.5.0:
+      Successfully uninstalled setuptools-65.5.0
+
+Successfully installed setuptools-80.9.0 wheel-0.45.1
+2025-09-19T00:05:08 | Upgraded pip in existing venv
+2025-09-19T00:05:08 | Finished install_prereqs_and_venv
+2025-09-19T00:10:09 | Starting install_prereqs_and_venv
+2025-09-19T00:10:09 | python found: Python 3.11.9
+2025-09-19T00:10:09 | Found existing venv at C:\bella\venv
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (80.9.0)
+Requirement already satisfied: wheel in c:\bella\venv\lib\site-packages (0.45.1)
+2025-09-19T00:10:11 | Upgraded pip in existing venv
+2025-09-19T00:10:11 | Finished install_prereqs_and_venv
+2025-09-19T00:19:19 | Starting install_prereqs_and_venv
+2025-09-19T00:19:19 | python found: Python 3.11.9
+2025-09-19T00:19:19 | Found existing venv at C:\bella\venv
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (80.9.0)
+Requirement already satisfied: wheel in c:\bella\venv\lib\site-packages (0.45.1)
+2025-09-19T00:19:22 | Upgraded pip in existing venv
+2025-09-19T00:19:22 | Finished install_prereqs_and_venv
+2025-09-19T00:20:27 | Starting install_prereqs_and_venv
+2025-09-19T00:20:27 | python found: Python 3.11.9
+2025-09-19T00:20:27 | Found existing venv at C:\bella\venv
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (80.9.0)
+Requirement already satisfied: wheel in c:\bella\venv\lib\site-packages (0.45.1)
+2025-09-19T00:20:29 | Upgraded pip in existing venv
+2025-09-19T00:20:29 | Finished install_prereqs_and_venv

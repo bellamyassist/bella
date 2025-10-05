@@ -1,0 +1,26 @@
+﻿2025-09-19T00:05:38 | START install_fusion
+2025-09-19T00:05:38 | Removing existing destination C:\bella\services\fusion
+2025-09-19T00:05:38 | Copying from C:\Fusion to C:\bella\services\fusion
+2025-09-19T00:05:38 | No requirements.txt found at C:\bella\services\fusion\requirements.txt - skipping pip install
+2025-09-19T00:05:38 | Running smoke command for fusion
+python 3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]
+2025-09-19T00:05:38 | Smoke test succeeded
+2025-09-19T00:05:38 | END install_fusion
+2025-09-19T00:19:23 | START install_fusion
+2025-09-19T00:19:23 | Copying from C:\Fusion to C:\bella\services\fusion
+2025-09-19T00:19:23 | No requirements.txt found at C:\bella\services\fusion\requirements.txt - skipping pip install
+2025-09-19T00:19:23 | Running smoke command for fusion
+python 3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]
+2025-09-19T00:19:24 | Smoke test succeeded
+2025-09-19T00:19:24 | END install_fusion
+2025-09-19T00:20:30 | START install_fusion
+2025-09-19T00:20:30 | Copying from C:\Fusion to C:\bella\services\fusion
+2025-09-19T00:20:30 | No requirements.txt found at C:\bella\services\fusion\requirements.txt - skipping pip install
+2025-09-19T00:20:30 | Running smoke command for fusion
+python 3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]
+2025-09-19T00:20:30 | Smoke test succeeded
+2025-09-19T00:20:30 | END install_fusion
+2025-09-19 00:36:09Z | start install_fusion
+2025-09-19 00:36:09Z | Target C:\Fusion already exists. Will skip clone but check for requirements.
+2025-09-19 00:36:09Z | start install_fusion
+2025-09-19 00:36:09Z | Target C:\Fusion already exists. Will skip clone but check for requirements.

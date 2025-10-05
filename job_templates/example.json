@@ -1,0 +1,16 @@
+{
+  "job_id": "job-{{id}}",
+  "type": "backtest",
+  "script": "neuro/backtest_runner.py",
+  "args": {
+    "strategy": "grid_search_v1",
+    "start": "2023-01-01",
+    "end": "2024-12-31",
+    "data_path": "drive:/bella/data/historical.parquet"
+  },
+  "resources": {
+    "gpu": true,
+    "mem_gb": 16
+  },
+  "result_path": "drive:/bella/results/job-{{id}}/"
+}

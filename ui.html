@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bella — Modern Assistant</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- React / Babel (dev builds via CDN) -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: linear-gradient(180deg,#f6fafc,#eef6ff); }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(6px); box-shadow: 0 8px 30px rgba(12,20,40,0.06); border-radius: 14px; }
+    .chat-bubble { max-width: 75%; padding: 10px 14px; border-radius: 14px; line-height:1.3; }
+    .user { background: linear-gradient(90deg,#1e3a8a,#3b82f6); color: white; margin-left:auto; }
+    .bot { background:#0f172a;color:#e6f0ff; }
+    .fade-in { animation: fadeIn .35s ease both; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform: translateY(0);} }
+    .pulse { animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0% { transform:scale(1); } 50% { transform:scale(1.02); } 100% { transform:scale(1); } }
+  </style>
+</head>
+<body>
+  <div id="root" class="p-6"></div>
+
+  <script type="text/babel">
+  const {useState,useEffect,useRef} = React;
+  const BACKEND = "http://127.0.0.1:8000";
+
+  function NiceButton({children, className, ...props}){
+    return <button {...props} className={"px-3 py-1 rounded-md text-sm font-medium shadow-sm " + (className||"")}/>
+  }
+
+  function useInterval(callback, delay) {
+    const savedRef = useRef();
+    useEffect(()=> savedRef.current = callback, [callback]);
+    useEffect(()=>{
+      if(delay===null) return;
+      const id = setInterval(()=> savedRef.current(), delay);
+      return ()=> clearInterval(id);
+    }, [delay]);
+  }
+
+  function App(){
+    const [token,setToken] = useState(localStorage.getItem("bella_token")||"");
+    const [serverStatus,setServerStatus] = useState("unknown");
+    const [prompt,setPrompt] = useState("");
+    const [chat, setChat] = useState([]); // {who:'bot'|'user', text, ts}
+    const [out, setOut] = useState("Ready.");
+    const [history, setHistory] = useState([]);
+    const [loadingChat, setLoadingChat] = useState(false);
+    const [cmdText, setCmdText] = useState("");
+    const [psMode, setPsMode] = useState(false);
+    const [shellMode, setShellMode] = useState(false);
+    const [filePath, setFilePath] = useState("scripts/hello.py");
+    const [fileContent, setFileContent] = useState("");
+    const [chartData, setChartData] = useState([0,0,0,0,0,0,0]);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+
+    useEffect(()=> {
+      // try auto-fill token
+      (async ()=>{
+        try{
+          const r = await fetch(BACKEND + "/api/token", {mode:"cors"});
+          if(r.ok){ const j = await r.json(); const t = j.token.replace(/^\uFEFF/,""); localStorage.setItem("bella_token", t); setToken(t); }
+        }catch(e){}
+      })();
+      refreshHistory();
+      checkHealth();
+    },[]);
+
+    useInterval(()=> checkHealth(), 10000);
+
+    async function checkHealth(){
+      try{
+        const r = await fetch(BACKEND + "/health");
+        if(r.ok) setServerStatus("up"); else setServerStatus("down");
+      }catch(e){ setServerStatus("down"); }
+    }
+
+    function tokenHeaders(){
+      const h = {};
+      if(token) h["x-api-token"] = token;
+      return h;
+    }
+
+    async function sendChat(){
+      if(!prompt) return;
+      setChat(c => [...c, {who:"user", text: prompt, ts: Date.now()}]);
+      setLoadingChat(true);
+      try{
+        const r = await fetch(BACKEND + "/api/chat", {method:"POST", headers: Object.assign({"Content-Type":"application/json"}, tokenHeaders()), body: JSON.stringify({prompt})});
+        if(!r.ok){ const t = await r.text(); setOut("Chat error: "+t); setLoadingChat(false); return; }
+        const j = await r.json();
+        const resp = j.response || (j.raw && JSON.stringify(j.raw)) || "No response";
+        setChat(c => [...c, {who:"bot", text: resp, ts: Date.now()}]);
+        setOut("Response received");
+        refreshHistory();
+      }catch(e){ setOut("Network/LLM error: "+e.message); }
+      setLoadingChat(false);
+      setPrompt("");
+    }
+
+    async function runCmd(){
+      if(!cmdText) return alert("Type a command");
+      setOut("Running...");
+      try{
+        const r = await fetch(BACKEND + "/api/command", {method:"POST", headers: Object.assign({"Content-Type":"application/json"}, tokenHeaders()), body: JSON.stringify({command: cmdText, shell: shellMode, powershell: psMode})});
+        const j = await r.json();
+        setOut(`Exit ${j.rc}\n\nSTDOUT:\n${j.stdout}\n\nSTDERR:\n${j.stderr}`);
+        setHistory([]); // force refresh
+        refreshHistory();
+      }catch(e){ setOut("Execution error: "+e.message) }
+    }
+
+    async function refreshHistory(){
+      try{
+        const r = await fetch(BACKEND + "/api/history?n=60", {headers: tokenHeaders()});
+        if(r.ok){ const j = await r.json(); setHistory(j); // populate chart
+          const counts = [0,0,0,0,0,0,0];
+          for(let i=0;i<Math.min(30,j.length);i++){ counts[i%7]++; }
+          setChartData(counts);
+        }
+      }catch(e){}
+    }
+
+    async function selfHeal(){
+      setOut("Attempting self-heal...");
+      try{
+        const r = await fetch(BACKEND + "/api/self_heal", {method:"POST", headers: tokenHeaders()});
+        const j = await r.json();
+        setOut("Self-heal: "+ JSON.stringify(j));
+        refreshHistory();
+      }catch(e){ setOut("Self-heal failed: "+e.message) }
+    }
+
+    async function loadFile(){
+      if(!filePath) return alert("enter path");
+      try{
+        const r = await fetch(BACKEND + "/api/files?path="+encodeURIComponent(filePath), {headers: tokenHeaders()});
+        if(!r.ok){ setOut("Load file error: "+r.status); return; }
+        const text = await r.text();
+        setFileContent(text);
+        setOut("Loaded "+filePath);
+      }catch(e){ setOut("Error: "+e.message) }
+    }
+
+    async function saveFile(){
+      try{
+        const r = await fetch(BACKEND + "/api/write-file", {method:"POST", headers: Object.assign({"Content-Type":"application/json"}, tokenHeaders()), body: JSON.stringify({path: filePath, content: fileContent})});
+        const j = await r.json();
+        setOut("Saved: "+j.path);
+        refreshHistory();
+      }catch(e){ setOut("Save error: "+e.message) }
+    }
+
+    async function uploadFile(ev){
+      const f = ev.target.files[0]; if(!f) return;
+      const fd = new FormData(); fd.append("file", f);
+      setOut("Uploading...");
+      try{
+        const r = await fetch(BACKEND + "/api/upload", {method:"POST", headers: tokenHeaders(), body: fd});
+        const j = await r.json();
+        setOut("Uploaded to: "+j.path);
+        refreshHistory();
+      }catch(e){ setOut("Upload error: "+e.message) }
+    }
+
+    // Chart render
+    const chartRef = useRef();
+    useEffect(()=>{
+      if(!chartRef.current) return;
+      const ctx = chartRef.current.getContext("2d");
+      if(chartRef.current._chart) chartRef.current._chart.destroy();
+      chartRef.current._chart = new Chart(ctx, {
+        type: "bar",
+        data: { labels: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], datasets: [{ label:"Actions (recent)", data: chartData, backgroundColor: "rgba(59,130,246,0.8)"}] },
+        options: { responsive:true, plugins:{ legend:{ display:false} } }
+      });
+    }, [chartData]);
+
+    // Small nice UI helpers
+    function ChatView(){
+      return <div className="p-4 flex flex-col gap-3 overflow-auto h-96">
+        {chat.map((c,idx)=>(
+          <div key={idx} className={"flex " + (c.who==="user" ? "justify-end":"justify-start")}>
+            <div className={"chat-bubble fade-in " + (c.who==="user" ? "user":"bot")}>
+              <div style={{fontSize:13, opacity:0.9}}>{c.text}</div>
+              <div style={{fontSize:11, opacity:0.6, marginTop:6}}>{new Date(c.ts).toLocaleTimeString()}</div>
+            </div>
+          </div>
+        ))}
+        {loadingChat && <div className="text-sm text-gray-500">Bella is thinking...</div>}
+      </div>
+    }
+
+    return <div className="max-w-screen-xl mx-auto grid grid-cols-12 gap-4">
+      {/* Left Sidebar */}
+      <div className="col-span-3 glass p-4 h-[86vh] overflow-auto">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="text-lg font-semibold">Bella</div>
+          <div className={"ml-auto px-2 py-1 rounded text-sm " + (serverStatus==="up" ? "bg-green-100 text-green-700":"bg-red-100 text-red-700")}>{serverStatus}</div>
+        </div>
+
+        <div className="mb-3">
+          <label className="text-sm text-gray-600">API token</label>
+          <div className="flex gap-2 mt-1">
+            <input value={token} onChange={e=>setToken(e.target.value)} className="flex-1 p-2 border rounded" placeholder="token"/>
+            <NiceButton onClick={()=>{ localStorage.setItem("bella_token", token); alert("Saved"); }} className="bg-blue-600 text-white">Save</NiceButton>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <div className="text-sm font-medium mb-2">Quick actions</div>
+          <div className="grid grid-cols-1 gap-2">
+            <NiceButton onClick={()=>{ setCmdText("whoami"); runCmd(); }} className="bg-indigo-600 text-white">whoami</NiceButton>
+            <NiceButton onClick={()=>{ setCmdText("ipconfig /all"); runCmd(); }} className="bg-indigo-600 text-white">ipconfig</NiceButton>
+            <NiceButton onClick={()=> selfHeal() } className="bg-yellow-500 text-white">Self Heal</NiceButton>
+            <NiceButton onClick={()=> { refreshHistory(); setOut("History refreshed"); }} className="bg-gray-200">Refresh History</NiceButton>
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <div className="text-sm font-medium mb-2">System Monitor</div>
+          <canvas ref={chartRef} height="120"></canvas>
+        </div>
+
+        <div className="text-xs text-gray-600 mt-4">
+          <div>Project: <b>C:\bella</b></div>
+          <div>UI: <a href="http://127.0.0.1:5500/ui.html" className="text-blue-600">http://127.0.0.1:5500/ui.html</a></div>
+        </div>
+      </div>
+
+      {/* Middle (chat & commands) */}
+      <div className="col-span-6 glass p-4 h-[86vh] flex flex-col">
+        <div className="flex items-center gap-3 mb-3">
+          <h2 className="text-lg font-semibold">Chat & Commands</h2>
+          <div className="ml-auto text-sm text-gray-500">Ask Bella anything — local LLM or hybrid</div>
+        </div>
+
+        <div className="flex-1 overflow-auto">
+          <ChatView />
+        </div>
+
+        <div className="mt-3">
+          <textarea value={prompt} onChange={e=>setPrompt(e.target.value)} placeholder="Ask Bella (chat) — e.g. 'How to fix a pip ImportError?'" className="w-full p-3 border rounded mb-2"></textarea>
+          <div className="flex gap-2">
+            <NiceButton onClick={sendChat} className="bg-green-600 text-white">Send</NiceButton>
+            <NiceButton onClick={()=>{ setPrompt(""); setChat([]); setOut("Cleared chat"); }} className="bg-gray-100">Clear</NiceButton>
+            <div className="ml-auto text-sm text-gray-500">Model: local (Ollama/GPT4All)</div>
+          </div>
+
+          <div className="mt-4 border-t pt-3">
+            <div className="text-sm text-gray-600 mb-2">Run a command</div>
+            <div className="flex gap-2">
+              <input value={cmdText} onChange={e=>setCmdText(e.target.value)} placeholder="e.g. dir, notepad" className="flex-1 p-2 border rounded"/>
+              <label className="flex items-center gap-1"><input type="checkbox" checked={psMode} onChange={e=>setPsMode(e.target.checked)}/>PS</label>
+              <label className="flex items-center gap-1"><input type="checkbox" checked={shellMode} onChange={e=>setShellMode(e.target.checked)}/>Shell</label>
+              <NiceButton onClick={runCmd} className="bg-indigo-600 text-white">Run</NiceButton>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right (history, files, logs) */}
+      <div className="col-span-3 glass p-4 h-[86vh] overflow-auto">
+        <div className="flex items-center gap-2 mb-3">
+          <h3 className="text-md font-semibold">History</h3>
+          <div className="ml-auto text-sm text-gray-500">{history.length} items</div>
+        </div>
+
+        <div className="space-y-2">
+          {history.slice(0,30).map((h,i)=>(
+            <div key={i} className="p-2 rounded border">
+              <div className="text-xs text-gray-500">{new Date(h.time*1000).toLocaleString()}</div>
+              <div className="font-medium mt-1">{h.action}</div>
+              <div className="text-xs text-gray-700 truncate">{(h.stdout||"").slice(0,200)}</div>
+            </div>
+          ))}
+          {history.length===0 && <div className="text-sm text-gray-400">No history yet</div>}
+        </div>
+
+        <div className="mt-4 border-t pt-3">
+          <div className="text-sm font-medium mb-2">File editor</div>
+          <input value={filePath} onChange={e=>setFilePath(e.target.value)} className="w-full p-2 border rounded mb-2" placeholder="scripts/hello.py"/>
+          <textarea value={fileContent} onChange={e=>setFileContent(e.target.value)} rows="6" className="w-full p-2 border rounded mb-2"></textarea>
+          <div className="flex gap-2">
+            <NiceButton onClick={loadFile} className="bg-gray-200">Load</NiceButton>
+            <NiceButton onClick={saveFile} className="bg-blue-600 text-white">Save</NiceButton>
+            <label className="ml-auto inline-flex items-center gap-2">
+              <input type="file" onChange={uploadFile} />
+              <span className="text-sm text-gray-500">Upload</span>
+            </label>
+          </div>
+        </div>
+
+        <div className="mt-4 border-t pt-3">
+          <div className="text-sm text-gray-600 mb-2">Output / Logs</div>
+          <pre className="bg-black text-green-200 p-2 rounded h-36 overflow-auto">{out}</pre>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  // small helpers used in JSX to avoid hoisting issues
+  async function sendChat(){ } // placeholder, real one inside App component
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>

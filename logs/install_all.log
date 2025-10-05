@@ -1,0 +1,198 @@
+﻿2025-09-19T00:04:56 | Starting orchestrator install_all.ps1
+2025-09-19T00:05:08 | install_neuro attempt 1
+2025-09-19T00:05:08 | install_neuro failed attempt 1: Container cannot be copied onto existing leaf item.
+2025-09-19T00:05:13 | install_neuro attempt 2
+2025-09-19T00:05:13 | install_neuro failed attempt 2: Container cannot be copied onto existing leaf item.
+2025-09-19T00:05:23 | install_neuro attempt 3
+2025-09-19T00:05:23 | install_neuro failed attempt 3: Container cannot be copied onto existing leaf item.
+2025-09-19T00:05:38 | install_neuro failed after retries
+2025-09-19T00:05:38 | install_fusion attempt 1
+2025-09-19T00:05:38 | install_all finished. Check C:\bella\logs\install_all.log and C:\bella\logs for detailed logs
+2025-09-19 00:19:18 | install_all started
+2025-09-19 00:19:18 | === START script: C:\bella\scripts\install_prereqs_and_venv.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+Starting install_prereqs_and_venv
+python found: Python 3.11.9
+Found existing venv at C:\bella\venv
+Upgraded pip in existing venv
+Finished install_prereqs_and_venv
+
+
+--- STDERR from C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+<none>
+
+2025-09-19 00:19:22 | === END script: C:\bella\scripts\install_prereqs_and_venv.ps1 (exit=0) ===
+2025-09-19 00:19:22 | === START script: C:\bella\scripts\install_neuro.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_neuro.ps1 ---
+START install_neuro
+Removing existing destination C:\bella\services\neuro
+Copying from C:\Neuroloop to C:\bella\services\neuro
+
+
+--- STDERR from C:\bella\scripts\install_neuro.ps1 ---
+Copy-Item : Container cannot be copied onto existing leaf item.
+At C:\bella\scripts\install_neuro.ps1:33 char:1
++ Copy-Item -Path (Join-Path $Source "*") -Destination $Dest -Recurse - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (C:\Neuroloop\config:String) [Copy-Item], PSArgumentException
+    + FullyQualifiedErrorId : CopyContainerItemToLeafError,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+
+2025-09-19 00:19:23 | === END script: C:\bella\scripts\install_neuro.ps1 (exit=1) ===
+2025-09-19 00:19:23 | === START script: C:\bella\scripts\install_fusion.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_fusion.ps1 ---
+START install_fusion
+Copying from C:\Fusion to C:\bella\services\fusion
+No requirements.txt found at C:\bella\services\fusion\requirements.txt - skipping pip install
+Running smoke command for fusion
+Smoke test succeeded
+END install_fusion
+
+
+--- STDERR from C:\bella\scripts\install_fusion.ps1 ---
+<none>
+
+2025-09-19 00:19:24 | === END script: C:\bella\scripts\install_fusion.ps1 (exit=0) ===
+2025-09-19 00:19:24 | install_all finished with failures: neuro(1)
+2025-09-19 00:19:45 | Creating zip: C:\bella\logs\bella_logs_20250919_001945.zip from C:\bella\logs\*
+2025-09-19 00:19:45 | Zip created: C:\bella\logs\bella_logs_20250919_001945.zip
+2025-09-19 00:19:45 | install_all finished (end of script).
+2025-09-19 00:20:27 | install_all started
+2025-09-19 00:20:27 | === START script: C:\bella\scripts\install_prereqs_and_venv.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+Starting install_prereqs_and_venv
+python found: Python 3.11.9
+Found existing venv at C:\bella\venv
+Upgraded pip in existing venv
+Finished install_prereqs_and_venv
+
+
+--- STDERR from C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+<none>
+
+2025-09-19 00:20:29 | === END script: C:\bella\scripts\install_prereqs_and_venv.ps1 (exit=0) ===
+2025-09-19 00:20:29 | === START script: C:\bella\scripts\install_neuro.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_neuro.ps1 ---
+START install_neuro
+Removing existing destination C:\bella\services\neuro
+Copying from C:\Neuroloop to C:\bella\services\neuro
+
+
+--- STDERR from C:\bella\scripts\install_neuro.ps1 ---
+Copy-Item : Container cannot be copied onto existing leaf item.
+At C:\bella\scripts\install_neuro.ps1:33 char:1
++ Copy-Item -Path (Join-Path $Source "*") -Destination $Dest -Recurse - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (C:\Neuroloop\config:String) [Copy-Item], PSArgumentException
+    + FullyQualifiedErrorId : CopyContainerItemToLeafError,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+
+2025-09-19 00:20:29 | === END script: C:\bella\scripts\install_neuro.ps1 (exit=1) ===
+2025-09-19 00:20:29 | === START script: C:\bella\scripts\install_fusion.ps1 ===
+
+--- STDOUT from C:\bella\scripts\install_fusion.ps1 ---
+START install_fusion
+Copying from C:\Fusion to C:\bella\services\fusion
+No requirements.txt found at C:\bella\services\fusion\requirements.txt - skipping pip install
+Running smoke command for fusion
+Smoke test succeeded
+END install_fusion
+
+
+--- STDERR from C:\bella\scripts\install_fusion.ps1 ---
+<none>
+
+2025-09-19 00:20:30 | === END script: C:\bella\scripts\install_fusion.ps1 (exit=0) ===
+2025-09-19 00:20:30 | install_all finished with failures: neuro(1)
+2025-09-19 00:20:39 | Creating zip: C:\bella\logs\bella_logs_20250919_002039.zip from C:\bella\logs\*
+2025-09-19 00:20:40 | Zip created: C:\bella\logs\bella_logs_20250919_002039.zip
+2025-09-19 00:20:40 | install_all finished (end of script).
+2025-09-19 00:35:48Z | install_all started
+2025-09-19 00:36:04Z | Temporarily setting ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+2025-09-19 00:36:04Z | RUNNING: C:\bella\scripts\install_prereqs_and_venv.ps1
+
+--- STDOUT: C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+Python found: Python 3.11.9
+venv already exists at C:\bella\venv
+Upgrading pip
+Installing python packages: fastapi, uvicorn[standard], python-dotenv, deep-translator, requests
+prereqs done
+
+
+--- STDERR: C:\bella\scripts\install_prereqs_and_venv.ps1 ---
+
+2025-09-19 00:36:07Z | DONE: C:\bella\scripts\install_prereqs_and_venv.ps1 (exit 0)
+2025-09-19 00:36:07Z | RUNNING: C:\bella\scripts\install_neuro.ps1
+
+--- STDOUT: C:\bella\scripts\install_neuro.ps1 ---
+Target C:\Neuroloop already exists. Will skip clone but check for requirements.
+
+
+--- STDERR: C:\bella\scripts\install_neuro.ps1 ---
+Test-Path : A parameter cannot be found that matches parameter name 'and'.
+At C:\bella\scripts\install_neuro.ps1:57 char:25
++ if (Test-Path $reqsPath -and Test-Path $venvPy) {
++                         ~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Test-Path], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+
+2025-09-19 00:36:08Z | DONE: C:\bella\scripts\install_neuro.ps1 (exit 1)
+2025-09-19 00:36:08Z | Script C:\bella\scripts\install_neuro.ps1 failed with exit 1. Attempt retry? (auto-retry once)
+2025-09-19 00:36:08Z | RUNNING: C:\bella\scripts\install_neuro.ps1
+
+--- STDOUT: C:\bella\scripts\install_neuro.ps1 ---
+Target C:\Neuroloop already exists. Will skip clone but check for requirements.
+
+
+--- STDERR: C:\bella\scripts\install_neuro.ps1 ---
+Test-Path : A parameter cannot be found that matches parameter name 'and'.
+At C:\bella\scripts\install_neuro.ps1:57 char:25
++ if (Test-Path $reqsPath -and Test-Path $venvPy) {
++                         ~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Test-Path], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+
+2025-09-19 00:36:08Z | DONE: C:\bella\scripts\install_neuro.ps1 (exit 1)
+2025-09-19 00:36:08Z | RUNNING: C:\bella\scripts\install_fusion.ps1
+
+--- STDOUT: C:\bella\scripts\install_fusion.ps1 ---
+Target C:\Fusion already exists. Will skip clone but check for requirements.
+
+
+--- STDERR: C:\bella\scripts\install_fusion.ps1 ---
+Test-Path : A parameter cannot be found that matches parameter name 'and'.
+At C:\bella\scripts\install_fusion.ps1:57 char:25
++ if (Test-Path $reqsPath -and Test-Path $venvPy) {
++                         ~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Test-Path], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+
+2025-09-19 00:36:09Z | DONE: C:\bella\scripts\install_fusion.ps1 (exit 1)
+2025-09-19 00:36:09Z | Script C:\bella\scripts\install_fusion.ps1 failed with exit 1. Attempt retry? (auto-retry once)
+2025-09-19 00:36:09Z | RUNNING: C:\bella\scripts\install_fusion.ps1
+
+--- STDOUT: C:\bella\scripts\install_fusion.ps1 ---
+Target C:\Fusion already exists. Will skip clone but check for requirements.
+
+
+--- STDERR: C:\bella\scripts\install_fusion.ps1 ---
+Test-Path : A parameter cannot be found that matches parameter name 'and'.
+At C:\bella\scripts\install_fusion.ps1:57 char:25
++ if (Test-Path $reqsPath -and Test-Path $venvPy) {
++                         ~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Test-Path], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+
+2025-09-19 00:36:09Z | DONE: C:\bella\scripts\install_fusion.ps1 (exit 1)
+2025-09-19 00:36:09Z | SOME INSTALLED FAILED: 2
+2025-09-19 00:36:18Z | Created zip: C:\bella\outbox\bella_logs_20250919_003618.zip
+2025-09-19 00:44:18Z | install_all complete

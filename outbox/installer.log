@@ -1,0 +1,20 @@
+Python 3.11.9
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+Requirement already satisfied: setuptools in c:\bella\venv\lib\site-packages (80.9.0)
+Requirement already satisfied: wheel in c:\bella\venv\lib\site-packages (0.45.1)
+Requirement already satisfied: fastapi==0.101.1 in c:\bella\venv\lib\site-packages (from -r C:\bella\requirements.txt (line 1)) (0.101.1)
+Requirement already satisfied: uvicorn==0.23.2 in c:\bella\venv\lib\site-packages (from -r C:\bella\requirements.txt (line 2)) (0.23.2)
+Requirement already satisfied: pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 in c:\bella\venv\lib\site-packages (from fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (2.11.9)
+Requirement already satisfied: starlette<0.28.0,>=0.27.0 in c:\bella\venv\lib\site-packages (from fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (0.27.0)
+Requirement already satisfied: typing-extensions>=4.5.0 in c:\bella\venv\lib\site-packages (from fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (4.15.0)
+Requirement already satisfied: click>=7.0 in c:\bella\venv\lib\site-packages (from uvicorn==0.23.2->-r C:\bella\requirements.txt (line 2)) (8.2.1)
+Requirement already satisfied: h11>=0.8 in c:\bella\venv\lib\site-packages (from uvicorn==0.23.2->-r C:\bella\requirements.txt (line 2)) (0.16.0)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (0.7.0)
+Requirement already satisfied: pydantic-core==2.33.2 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (2.33.2)
+Requirement already satisfied: typing-inspection>=0.4.0 in c:\bella\venv\lib\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (0.4.1)
+Requirement already satisfied: anyio<5,>=3.4.0 in c:\bella\venv\lib\site-packages (from starlette<0.28.0,>=0.27.0->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (4.10.0)
+Requirement already satisfied: idna>=2.8 in c:\bella\venv\lib\site-packages (from anyio<5,>=3.4.0->starlette<0.28.0,>=0.27.0->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (3.10)
+Requirement already satisfied: sniffio>=1.1 in c:\bella\venv\lib\site-packages (from anyio<5,>=3.4.0->starlette<0.28.0,>=0.27.0->fastapi==0.101.1->-r C:\bella\requirements.txt (line 1)) (1.3.1)
+Requirement already satisfied: colorama in c:\bella\venv\lib\site-packages (from click>=7.0->uvicorn==0.23.2->-r C:\bella\requirements.txt (line 2)) (0.4.6)
+Token already exists at token.txt
+Setup complete: token, scripts, files ready.

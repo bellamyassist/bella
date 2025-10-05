@@ -1,0 +1,28 @@
+﻿2025-09-19 00:55:55Z | Starting self_heal (DoFixes=True)
+2025-09-19 00:55:55Z | venv ok
+2025-09-19 00:55:55Z | Checking pip packages
+Requirement already satisfied: pip in c:\bella\venv\lib\site-packages (25.2)
+2025-09-19 00:55:57Z | Found fastapi
+2025-09-19 00:55:57Z | Package missing: uvicorn[standard]
+2025-09-19 00:55:57Z | Installing uvicorn[standard]...
+Requirement already satisfied: uvicorn[standard] in c:\bella\venv\lib\site-packages (0.35.0)
+Requirement already satisfied: click>=7.0 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (8.2.1)
+Requirement already satisfied: h11>=0.8 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.16.0)
+Requirement already satisfied: colorama>=0.4 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.4.6)
+Requirement already satisfied: httptools>=0.6.3 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (0.6.4)
+Requirement already satisfied: python-dotenv>=0.13 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (1.1.1)
+Requirement already satisfied: pyyaml>=5.1 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (6.0.2)
+Requirement already satisfied: watchfiles>=0.13 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (1.1.0)
+Requirement already satisfied: websockets>=10.4 in c:\bella\venv\lib\site-packages (from uvicorn[standard]) (15.0.1)
+Requirement already satisfied: anyio>=3.0.0 in c:\bella\venv\lib\site-packages (from watchfiles>=0.13->uvicorn[standard]) (4.10.0)
+Requirement already satisfied: idna>=2.8 in c:\bella\venv\lib\site-packages (from anyio>=3.0.0->watchfiles>=0.13->uvicorn[standard]) (3.10)
+Requirement already satisfied: sniffio>=1.1 in c:\bella\venv\lib\site-packages (from anyio>=3.0.0->watchfiles>=0.13->uvicorn[standard]) (1.3.1)
+Requirement already satisfied: typing_extensions>=4.5 in c:\bella\venv\lib\site-packages (from anyio>=3.0.0->watchfiles>=0.13->uvicorn[standard]) (4.15.0)
+2025-09-19 00:55:59Z | Found python-dotenv
+2025-09-19 00:55:59Z | Found requests
+2025-09-19 00:56:00Z | Found deep-translator
+2025-09-19 00:56:00Z | Port 8000 not in use. Will attempt to start Bella server (non-blocking).
+2025-09-19 00:56:00Z | Called start_bella.bat
+2025-09-19 00:56:01Z | git present
+2025-09-19 00:56:01Z | self_heal finished. If problems remain, create logs bundle and paste path to me.
+2025-09-19 00:56:01Z | Logs zipped to C:\bella\outbox\self_heal_logs_20250919_005601.zip

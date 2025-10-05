@@ -1,0 +1,12 @@
+{
+    "job_id":  "job-real-001",
+    "type":  "backtest",
+    "script":  "neuro/backtest_runner.py",
+    "args":  {
+                 "batch_size":  64,
+                 "epochs":  3
+             },
+    "resources":  {
+                      "gpu":  false
+                  }
+}

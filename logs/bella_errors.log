@@ -1,0 +1,108 @@
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
+Traceback (most recent call last):
+  File "C:\bella\bella_core\app.py", line 69, in run_command
+    result = await executor.run_shell(cmd_to_run)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\bella\bella_core\executor.py", line 12, in run_shell
+    proc = await asyncio.create_subprocess_shell(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\subprocess.py", line 210, in create_subprocess_shell
+    transport, protocol = await loop.subprocess_shell(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1675, in subprocess_shell
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 503, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+
