@@ -1,0 +1,6 @@
+
+venv/
+
+outbox/
+
+github token.txt
