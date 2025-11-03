@@ -1,0 +1,66 @@
+.github/workflows/bella-monitor.yml
+name: Bella Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run Bella Monitor
+        env:
+          NGROK_URL: ${{ secrets.NGROK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          CHECK_TIMEOUT: 8
+        run: |
+          python3 - <<'PY'
+          import os, requests, json, datetime
+
+          NGROK = os.getenv("NGROK_URL", "").rstrip("/")
+          BOT = os.getenv("TELEGRAM_BOT_TOKEN")
+          CHAT = os.getenv("TG_CHAT_ID")
+          TIMEOUT = int(os.getenv("CHECK_TIMEOUT","8"))
+          STATE_FILE = "/tmp/bella_monitor_state.json"
+
+          def send_tg(msg):
+              if not BOT or not CHAT: return
+              try:
+                  r = requests.post(f"https://api.telegram.org/bot{BOT}/sendMessage",
+                                    json={"chat_id": CHAT, "text": msg}, timeout=10)
+                  print("Telegram:", r.status_code)
+              except Exception as e:
+                  print("Telegram error:", e)
+
+          def check_url():
+              for path in ("/health", ""):
+                  try:
+                      r = requests.get(NGROK + path, timeout=TIMEOUT)
+                      if r.status_code == 200:
+                          return True
+                  except Exception as e:
+                      print("Check fail", e)
+              return False
+
+          prev = {"ok": True}
+          if os.path.exists(STATE_FILE):
+              with open(STATE_FILE) as f: prev = json.load(f)
+
+          ok = check_url()
+          with open(STATE_FILE,"w") as f: json.dump({"ok": ok}, f)
+
+          now = datetime.datetime.utcnow().isoformat()
+          if not ok and prev.get("ok", True):
+              send_tg(f"🚨 [Bella Monitor] ALERT: system DOWN at {now}\nTarget: {NGROK}")
+          elif ok and not prev.get("ok", True):
+              send_tg(f"✅ [Bella Monitor] RECOVERED: back ONLINE at {now}\nTarget: {NGROK}")
+          else:
+              print("No change. OK=", ok)
+          PY
+
