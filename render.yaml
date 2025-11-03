@@ -1,0 +1,36 @@
+# =============================================================
+# Bella F47 Unified Deployment (CLEAN SAFE TEMPLATE)
+# =============================================================
+
+services:
+  - type: web
+    name: bella-f47
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bella_runner.py
+  - type: worker
+    name: bella-monitor
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: python monitor.py
+
+# Environment variables (all added securely via Render dashboard)
+envVars:
+  - key: OPENAI_API_KEY
+    sync: false
+  - key: GEMINI_API_KEY
+    sync: false
+  - key: TELEGRAM_BOT_TOKEN
+    sync: false
+  - key: TG_CHAT_ID
+    sync: false
+  - key: NGROK_URL
+    sync: false
+  - key: CHECK_INTERVAL
+    value: "300"
+  - key: CHECK_TIMEOUT
+    value: "8"
